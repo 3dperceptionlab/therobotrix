@@ -1,5 +1,7 @@
 # The RobotriX
 
+[c0]: https://placehold.it/15/f03c15/000000?text=+
+
 ## Paper
 
 The dataset's paper is available as a preprint in arXiv here [The RobotriX: An eXtremely Photorealistic and Very Large-Scale Indoor Dataset of Sequences with Robot Trajectories and Interactions](#).
@@ -17,10 +19,21 @@ If you are inspired by or use The RobotriX data or code, please cite:
 
 ## Data
 
-| Type      | #0    | #1    | #2    | #3      | #4      | #5    | #6    | #7    | #8    | #9    |
-| --------- | ----- | ----- | ----- | ------  | ------- | ----- | ----- | ----- | ----- | ----- |
-| Semantic  | void  | wall  | floor | ceiling | window  | door  | table | chair | lamp  | sofa  |
-| Detection | -     | -     | -     | -       | -       | -     | table | chair | lamp  | sofa  |
+| Type | 00 <br> ![c0] | 01 <br> ![c0] | 02 <br> ![c0] | 03 <br> ![c0] | 04 <br> ![c0] | 05 <br> ![c0] | 06 <br> ![c0] | 07 <br> ![c0] | 08 <br> ![c0] | 09 <br> ![c0] | 10 <br> ![c0]  | 11 <br> ![c0]  | 12 <br> ![c0]  |
+| - | - | - | - | - | - | - | - | - | - | - | -  | -  | -  |
+| Semantic  | void  | wall  | floor | ceiling | window  | door  | table | chair | lamp  | sofa  | cupboard | screen | hand |
+| Detection | -     | -     | -     | -       | -       | -     | table | chair | lamp  | sofa  | cupboard | screen | hand |
+
+| Type | 13 <br> ![c0] | 14 <br> ![c0] | 15 <br> ![c0] | 16 <br> ![c0] | 17 <br> ![c0] | 18 <br> ![c0] | 19 <br> ![c0] | 20 <br> ![c0] | 21 <br> ![c0] | 22 <br> ![c0] | 23 <br> ![c0] | 24 <br> ![c0] | 25 <br> ![c0]  |
+| - | - | - | - | - | - | - | - | - | - | - | -  | -  | -  |
+| Semantic  | frame  | bed   | fridge | whiteboard | book | bottle | plant | furniture | toilet | phone | bathtub | cup | mat |
+| Detection | frame  | bed   | fridge | whiteboard | book | bottle | plant | - | lamp  | toilet | phone | bathtub | cup | mat |
+
+| Type | 26 <br> ![c0] | 27 <br> ![c0] | 28 <br> ![c0] | 29 <br> ![c0] | 30 <br> ![c0] | 31 <br> ![c0] | 32 <br> ![c0] | 33 <br> ![c0] | 34 <br> ![c0] | 35 <br> ![c0] | 36 <br> ![c0] | 37 <br> ![c0] | 38 <br> ![c0]  |
+| - | - | - | - | - | - | - | - | - | - | - | -  | -  | -  |
+| Semantic  | mirror | sink  | box | mouse | keyboard | bin | cushion | shelf | bag | curtain | kitchen_stuff | bath_stuff | prop |
+| Detection | mirror | sink  | box | mouse | keyboard | bin | cushion | shelf | bag | - | kitchen_stuff | bath_stuff | prop |
+
 
 ### Raw Data
 
