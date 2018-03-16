@@ -28,7 +28,7 @@ Enter the RobotriX, an extremely photorealistic indoor dataset designed to enabl
 
 ### Download Links
 
-To be released.
+Public download links to be released, send mail to [agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es).
 
 ## Tools
 
