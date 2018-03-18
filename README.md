@@ -1,22 +1,65 @@
 # The RobotriX
 
-[c0]: https://placehold.it/15/f03c15/000000?text=+
+[c0]: https://placehold.it/15/000000/000000?text=+
+[c1]: https://placehold.it/15/0000ff/000000?text=+
+[c2]: https://placehold.it/15/00ff00/000000?text=+
+[c3]: https://placehold.it/15/00ffff/000000?text=+
+[c4]: https://placehold.it/15/ff0000/000000?text=+
+[c5]: https://placehold.it/15/ff00ff/000000?text=+
+[c6]: https://placehold.it/15/ffff00/000000?text=+
+[c7]: https://placehold.it/15/ffffff/000000?text=+
+[c8]: https://placehold.it/15/000080/000000?text=+
+[c9]: https://placehold.it/15/008000/000000?text=+
+[c10]: https://placehold.it/15/008080/000000?text=+
+[c11]: https://placehold.it/15/800000/000000?text=+
+[c12]: https://placehold.it/15/800080/000000?text=+
+
+[c13]: https://placehold.it/15/808000/000000?text=+
+[c14]: https://placehold.it/15/808080/000000?text=+
+[c15]: https://placehold.it/15/ff6000/000000?text=+
+[c16]: https://placehold.it/15/ffd7b4/000000?text=+
+[c17]: https://placehold.it/15/aa6e28/000000?text=+
+[c18]: https://placehold.it/15/e6beff/000000?text=+
+[c19]: https://placehold.it/15/d2f53c/000000?text=+
+[c20]: https://placehold.it/15/aaffc3/000000?text=+
+[c21]: https://placehold.it/15/e6194b/000000?text=+
+[c22]: https://placehold.it/15/fffac8/000000?text=+
+[c23]: https://placehold.it/15/0082c8/000000?text=+
+[c24]: https://placehold.it/15/3cb94b/000000?text=+
+[c25]: https://placehold.it/15/f58230/000000?text=+
+
+[c26]: https://placehold.it/15/cdcd00/000000?text=+
+[c27]: https://placehold.it/15/ffc125/000000?text=+
+
+[c28]: https://placehold.it/15/ff6000/000000?text=+
+
+[c29]: https://placehold.it/15/717162/000000?text=+
+[c30]: https://placehold.it/15/cae1ff/000000?text=+
+[c31]: https://placehold.it/15/5f9ea0/000000?text=+
+[c32]: https://placehold.it/15/00fa9a/000000?text=+
+[c33]: https://placehold.it/15/cdba96/000000?text=+
+[c34]: https://placehold.it/15/8b4500/000000?text=+
+[c35]: https://placehold.it/15/ff4500/000000?text=+
+[c36]: https://placehold.it/15/8e388e/000000?text=+
+[c37]: https://placehold.it/15/c67185/000000?text=+
+[c38]: https://placehold.it/15/c5c1aa/000000?text=+
+
 
 Enter the RobotriX, an extremely photorealistic indoor dataset designed to enable the application of deep learning techniques to a wide variety of robotic vision problems. The RobotriX consists of hyperrealistic indoor scenes which are explored by robot agents which also interact with objects in a visually realistic manner in that simulated world. Photorealistic scenes and robots are rendered by Unreal Engine into a virtual reality headset which captures gaze so that a human operator can move the robot and use controllers for the robotic hands; scene information is dumped on a per-frame basis so that it can be reproduced offline using UnrealCV to generate raw data and ground truth labels. By taking this approach we were able to generate a dataset of 38 semantic classes across 512 sequences totaling 8M stills recorded at +60 frames per second with full HD resolution. For each frame, RGB-D and 3D information is provided with full annotations in both spaces. Thanks to the high quality and quantity of both raw information and annotations, the RobotriX will serve as a new milestone for investigating 2D and 3D robotic vision tasks with large-scale data-driven techniques.
 
 ## Data
 
-| Type | 00 <br> ![c0] | 01 <br> ![c0] | 02 <br> ![c0] | 03 <br> ![c0] | 04 <br> ![c0] | 05 <br> ![c0] | 06 <br> ![c0] | 07 <br> ![c0] | 08 <br> ![c0] | 09 <br> ![c0] | 10 <br> ![c0]  | 11 <br> ![c0]  | 12 <br> ![c0]  |
+| Type | 00 <br> ![c0] | 01 <br> ![c1] | 02 <br> ![c2] | 03 <br> ![c3] | 04 <br> ![c4] | 05 <br> ![c5] | 06 <br> ![c6] | 07 <br> ![c7] | 08 <br> ![c8] | 09 <br> ![c9] | 10 <br> ![c10]  | 11 <br> ![c11]  | 12 <br> ![c12]  |
 | - | - | - | - | - | - | - | - | - | - | - | -  | -  | -  |
 | Semantic  | void  | wall  | floor | ceiling | window  | door  | table | chair | lamp  | sofa  | cupboard | screen | hand |
 | Detection | -     | -     | -     | -       | -       | -     | table | chair | lamp  | sofa  | cupboard | screen | hand |
 
-| Type | 13 <br> ![c0] | 14 <br> ![c0] | 15 <br> ![c0] | 16 <br> ![c0] | 17 <br> ![c0] | 18 <br> ![c0] | 19 <br> ![c0] | 20 <br> ![c0] | 21 <br> ![c0] | 22 <br> ![c0] | 23 <br> ![c0] | 24 <br> ![c0] | 25 <br> ![c0]  |
+| Type | 13 <br> ![c13] | 14 <br> ![c14] | 15 <br> ![c15] | 16 <br> ![c16] | 17 <br> ![c17] | 18 <br> ![c18] | 19 <br> ![c19] | 20 <br> ![c20] | 21 <br> ![c21] | 22 <br> ![c22] | 23 <br> ![c23] | 24 <br> ![c24] | 25 <br> ![c25]  |
 | - | - | - | - | - | - | - | - | - | - | - | -  | -  | -  |
 | Semantic  | frame  | bed   | fridge | whiteboard | book | bottle | plant | furniture | toilet | phone | bathtub | cup | mat |
 | Detection | frame  | bed   | fridge | whiteboard | book | bottle | plant | - | lamp  | toilet | phone | bathtub | cup | mat |
 
-| Type | 26 <br> ![c0] | 27 <br> ![c0] | 28 <br> ![c0] | 29 <br> ![c0] | 30 <br> ![c0] | 31 <br> ![c0] | 32 <br> ![c0] | 33 <br> ![c0] | 34 <br> ![c0] | 35 <br> ![c0] | 36 <br> ![c0] | 37 <br> ![c0] | 38 <br> ![c0]  |
+| Type | 26 <br> ![c26] | 27 <br> ![c27] | 28 <br> ![c28] | 29 <br> ![c29] | 30 <br> ![c30] | 31 <br> ![c31] | 32 <br> ![c32] | 33 <br> ![c33] | 34 <br> ![c34] | 35 <br> ![c35] | 36 <br> ![c36] | 37 <br> ![c37] | 38 <br> ![c38]  |
 | - | - | - | - | - | - | - | - | - | - | - | -  | -  | -  |
 | Semantic  | mirror | sink  | box | mouse | keyboard | bin | cushion | shelf | bag | curtain | kitchen_stuff | bath_stuff | prop |
 | Detection | mirror | sink  | box | mouse | keyboard | bin | cushion | shelf | bag | - | kitchen_stuff | bath_stuff | prop |
