@@ -44,8 +44,29 @@
 [c37]: https://placehold.it/15/c67185/000000?text=+
 [c38]: https://placehold.it/15/c5c1aa/000000?text=+
 
+[seq0]: ./img/seq0.jpg
+[seq0_depth]: ./img/seq0_depth.jpg
+[seq0_mask]: ./img/seq0_mask.jpg
+[seq1]: ./img/seq1.jpg
+[seq1_depth]: ./img/seq1_depth.jpg
+[seq1_mask]: ./img/seq1_mask.jpg
+[seq2]: ./img/seq2.jpg
+[seq2_depth]: ./img/seq2_depth.jpg
+[seq2_mask]: ./img/seq2_mask.jpg
+
+
 
 Enter the RobotriX, an extremely photorealistic indoor dataset designed to enable the application of deep learning techniques to a wide variety of robotic vision problems. The RobotriX consists of hyperrealistic indoor scenes which are explored by robot agents which also interact with objects in a visually realistic manner in that simulated world. Photorealistic scenes and robots are rendered by Unreal Engine into a virtual reality headset which captures gaze so that a human operator can move the robot and use controllers for the robotic hands; scene information is dumped on a per-frame basis so that it can be reproduced offline using UnrealCV to generate raw data and ground truth labels. By taking this approach we were able to generate a dataset of 38 semantic classes across 512 sequences totaling 8M stills recorded at +60 frames per second with full HD resolution. For each frame, RGB-D and 3D information is provided with full annotations in both spaces. Thanks to the high quality and quantity of both raw information and annotations, the RobotriX will serve as a new milestone for investigating 2D and 3D robotic vision tasks with large-scale data-driven techniques.
+
+![seq0]
+![seq0_depth]
+![seq0_mask]
+![seq1]
+![seq1_depth]
+![seq1_mask]
+![seq2]
+![seq2_depth]
+![seq2_mask]
 
 ## Contents
 
@@ -66,6 +87,8 @@ Enter the RobotriX, an extremely photorealistic indoor dataset designed to enabl
 
 ## Data
 
+We generated a dataset of 512 sequences recorded on 16 different indoor layouts at +60 FPS with a duration that spans between one and five minutes each. That adds up to a total of approximately eight million individual frames. This initial release of the dataset contains 32 detection and 39 semantic classes. The categories were selected from the most common and useful household goods in indoor environments for social robots. 
+
 | Type | 00 <br> ![c0] | 01 <br> ![c1] | 02 <br> ![c2] | 03 <br> ![c3] | 04 <br> ![c4] | 05 <br> ![c5] | 06 <br> ![c6] | 07 <br> ![c7] | 08 <br> ![c8] | 09 <br> ![c9] | 10 <br> ![c10]  | 11 <br> ![c11]  | 12 <br> ![c12]  |
 | - | - | - | - | - | - | - | - | - | - | - | -  | -  | -  |
 | Semantic  | void  | wall  | floor | ceiling | window  | door  | table | chair | lamp  | sofa  | cupboard | screen | hand |
@@ -83,11 +106,25 @@ Enter the RobotriX, an extremely photorealistic indoor dataset designed to enabl
 
 ### Raw Data
 
-Public download links to be released, send mail to [agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es).
+For each frame, we provide the following data:
+
+* 3D poses for the cameras, objects, and robot joints.
+* RGB image at 1920x1080 resolution in 24-bit PNG format.
+* Depth map at 1920x1080 resolution in 16-bit grayscale PNG format.
+* 2D instance mask at 1920x1080 resolution in RGB 24-bit PNG format.
+
+Public download links to be released.
 
 ### Ground Truth
 
-Public download links to be released, send mail to [agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es).
+For each frame, we provide the tools to generate the following annotations:
+
+* 2D class mask at 1920x1080 resolution in RGB 24-bit PNG format.
+* 2D/3D object instance bounding boxes in XML format.
+* 3D point cloud in PLY format with RGB color.
+* 3D instance/class mask in PLY format with RGB color.
+
+Due to the excessive size of that large-scale ground truth, we provide the needed tools and instructions so that anyone can generate the annotations they need locally using the aforementioned raw data. Nevertheless, we provide an annotated subset for visualization and demo purposes. Public download links to be released.
 
 ## Tools
 
@@ -286,4 +323,4 @@ Both the data and the code for The RobotriX are released under the [MIT license]
 
 ## Contact
 
-Please contact Albert Garcia at [albertgg93@gmail.com](mailto:albertgg93@gmail.com) if you have any questions or requests.
+Please contact Albert Garcia at [agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es) if you have any questions or requests.
