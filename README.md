@@ -47,6 +47,23 @@
 
 Enter the RobotriX, an extremely photorealistic indoor dataset designed to enable the application of deep learning techniques to a wide variety of robotic vision problems. The RobotriX consists of hyperrealistic indoor scenes which are explored by robot agents which also interact with objects in a visually realistic manner in that simulated world. Photorealistic scenes and robots are rendered by Unreal Engine into a virtual reality headset which captures gaze so that a human operator can move the robot and use controllers for the robotic hands; scene information is dumped on a per-frame basis so that it can be reproduced offline using UnrealCV to generate raw data and ground truth labels. By taking this approach we were able to generate a dataset of 38 semantic classes across 512 sequences totaling 8M stills recorded at +60 frames per second with full HD resolution. For each frame, RGB-D and 3D information is provided with full annotations in both spaces. Thanks to the high quality and quantity of both raw information and annotations, the RobotriX will serve as a new milestone for investigating 2D and 3D robotic vision tasks with large-scale data-driven techniques.
 
+## Contents
+
+1. [Data](#data)
+    1. Raw Data
+    2. Ground Truth
+2. [Tools](#tools)
+    1. Server
+    2. Scene Parser
+    3. Instance Mapper
+    4. Client
+    5. Generator
+    6. Utils
+3. [Assets](#assets)
+4. [Troubleshooting](#troubleshooting)
+5. [License](#license)
+6. [Contact](#contact)
+
 ## Data
 
 | Type | 00 <br> ![c0] | 01 <br> ![c1] | 02 <br> ![c2] | 03 <br> ![c3] | 04 <br> ![c4] | 05 <br> ![c5] | 06 <br> ![c6] | 07 <br> ![c7] | 08 <br> ![c8] | 09 <br> ![c9] | 10 <br> ![c10]  | 11 <br> ![c11]  | 12 <br> ![c12]  |
@@ -83,7 +100,6 @@ The codebase is divided into different parts:
 * instance mapper
 * client
 * generator
-* assets
 * utils
 
 ### Server
@@ -245,10 +261,6 @@ The following requirements must be met to execute the generator:
   * pillow
   * plyfile
 
-### Assets
-
-To be released...
-
 ### Utils
 
 The `utils` folder contains a set of Python classes and methods that encapsulate functionality that is commonly reused by all the previous tools. Some of the utilities are:
@@ -260,7 +272,11 @@ The `utils` folder contains a set of Python classes and methods that encapsulate
 * `utils/sequence.py` for handling JSON formatted sequences.
 * `utils/ucv.py` contains functions that wrap UnrealCV commands to provide high level procedures such as object placement, camera placement, client connection...
 
-## Known Issues and Troubleshooting
+## Assets
+
+To be released...
+
+## Troubleshooting
 
 * UnrealCV 0.3.10 segmentation issues with Unreal Engine >4.16.
 
