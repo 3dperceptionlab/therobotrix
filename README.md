@@ -64,12 +64,11 @@ Enter the RobotriX, an extremely photorealistic indoor dataset designed to enabl
 | Semantic  | mirror | sink  | box | mouse | keyboard | bin | cushion | shelf | bag | curtain | kitchen_stuff | bath_stuff | prop |
 | Detection | mirror | sink  | box | mouse | keyboard | bin | cushion | shelf | bag | - | kitchen_stuff | bath_stuff | prop |
 
-
 ### Raw Data
 
-### Ground Truth
+Public download links to be released, send mail to [agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es).
 
-### Download Links
+### Ground Truth
 
 Public download links to be released, send mail to [agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es).
 
@@ -248,9 +247,22 @@ The following requirements must be met to execute the generator:
 
 ### Assets
 
+To be released...
+
 ### Utils
 
+The `utils` folder contains a set of Python classes and methods that encapsulate functionality that is commonly reused by all the previous tools. Some of the utilities are:
+
+* `utils/camera.py` which defines a Camera class that provides functionality for holding camera information (calibration parameters, FoV, and depth range) and JSON load/store.
+* `utils/color.py` for handling RGB colors and interpreting regular expressions.
+* `utils/objectclass.py` for encapsulating information about an object class for both semantic and detection problems with their corresponding IDs, names, and colors.
+* `utils/sceneobject.py` to hold information about an object in the scene (its class, instance, and instance color assigned by UnrealCV).
+* `utils/sequence.py` for handling JSON formatted sequences.
+* `utils/ucv.py` contains functions that wrap UnrealCV commands to provide high level procedures such as object placement, camera placement, client connection...
+
 ## Known Issues and Troubleshooting
+
+* UnrealCV 0.3.10 segmentation issues with Unreal Engine >4.16.
 
 ## License
 
