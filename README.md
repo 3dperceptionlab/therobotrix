@@ -71,10 +71,6 @@ Enter the RobotriX, an extremely photorealistic indoor dataset designed to enabl
 ![seq2_depth]
 ![seq2_mask]
 
-## Demo
-
-
-
 ## Contents
 
 1. [Data](#data)
