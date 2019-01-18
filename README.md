@@ -53,11 +53,10 @@
 [seq2]: ./img/seq2.jpg
 [seq2_depth]: ./img/seq2_depth.jpg
 [seq2_mask]: ./img/seq2_mask.jpg
-[video_preview]: ./img/video_demo.png
+[video_preview]: ./img/video_demo_2.jpg
 
 
-[![video_preview]](https://www.youtube.com/watch?v=YOiVr2A2TZo)
-
+[![video_preview]](https://www.youtube.com/watch?v=CiRc5tCtCak)
 
 Enter the RobotriX, an extremely photorealistic indoor dataset designed to enable the application of deep learning techniques to a wide variety of robotic vision problems. The RobotriX consists of hyperrealistic indoor scenes which are explored by robot agents which also interact with objects in a visually realistic manner in that simulated world. Photorealistic scenes and robots are rendered by Unreal Engine into a virtual reality headset which captures gaze so that a human operator can move the robot and use controllers for the robotic hands; scene information is dumped on a per-frame basis so that it can be reproduced offline using UnrealCV to generate raw data and ground truth labels. By taking this approach we were able to generate a dataset of 38 semantic classes across 512 sequences totaling 8M stills recorded at +60 frames per second with full HD resolution. For each frame, RGB-D and 3D information is provided with full annotations in both spaces. Thanks to the high quality and quantity of both raw information and annotations, the RobotriX will serve as a new milestone for investigating 2D and 3D robotic vision tasks with large-scale data-driven techniques.
 
@@ -74,15 +73,7 @@ Enter the RobotriX, an extremely photorealistic indoor dataset designed to enabl
 ## Contents
 
 1. [Data](#data)
-    1. Raw Data
-    2. Ground Truth
-2. [Tools](#tools)
-    1. Server
-    2. Scene Parser
-    3. Instance Mapper
-    4. Client
-    5. Generator
-    6. Utils
+2. [UnrealROX](#unrealrox)
 3. [Assets](#assets)
 4. [Troubleshooting](#troubleshooting)
 5. [License](#license)
@@ -107,16 +98,111 @@ We generated a dataset of 512 sequences recorded on 16 different indoor layouts 
 | Semantic  | mirror | sink  | box | mouse | keyboard | bin | cushion | shelf | bag | curtain | kitchen_stuff | bath_stuff | prop |
 | Detection | mirror | sink  | box | mouse | keyboard | bin | cushion | shelf | bag | - | kitchen_stuff | bath_stuff | prop |
 
+Due to the huge size of the data (~7 TiB), we are currently distributing part of it via private links to our FTP server to avoid excessive traffic (drop a mail to [agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es) for them). However, half of the dataset is already available (and increasing every day) through [OSF](https://osf.io/b3g2y/) at https://osf.io/b3g2y/ (OSF is a free, open source web application that connects and supports the research workflow, enabling scientists to increase the efficiency and effectiveness of their research. Researchers use OSF to collaborate, document, archive, share, and register research projects, materials, and data. OSF is the flagship product of the non-profit Center for Open Science).
+
+The following data is available at the OSF project page:
+
+| **ID**    | **Scene**            | **Robot** | **Interactable Objects**                                                                                                                                                                                                                                                                                                                                                                                                                                              | **Cameras**                                                                     | **Duration** | **Frames**  | **Total**           |
+| --------- | -------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | ------------ | ----------- | ------------------- |
+| **TOTAL** | **TOTAL**            | **TOTAL** | **TOTAL**                                                                                                                                                                                                                                                                                                                                                                                                                                                             | **TOTAL**                                                                       |              |             | **3.039.252**       |
+| **000**   | **HamburgHaus**      |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | **11:48**    | **63.714**  | **318.570**         |
+| 000       | HamburgHaus          | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (Head, LeftHand, RightHand, MainRoom, SecondaryRoom)                          | 01:27        | 7838        | 39190               |
+| 001       | HamburgHaus          | Mannequin | 1 (Moka_Chaleira_Moka_10)                                                                                                                                                                                                                                                                                                                                                                                                                                             | 5 (Head, LeftHand, RightHand, MainRoom, SecondaryRoom)                          | 01:18        | 7022        | 35110               |
+| 002       | HamburgHaus          | Mannequin | 1 (Vase_Rounded_46)                                                                                                                                                                                                                                                                                                                                                                                                                                                   | 5 (Head, LeftHand, RightHand, MainRoom, SecondaryRoom)                          | 01:02        | 5554        | 27770               |
+| 003       | HamburgHaus          | Mannequin | 3 (Vase_Rounded_46, DEC_living_book_6, and DEC_living_book_4)                                                                                                                                                                                                                                                                                                                                                                                                         | 5 (Head, LeftHand, RightHand, MainRoom, SecondaryRoom)                          | 01:49        | 9786        | 48930               |
+| 004       | HamburgHaus          | Mannequin | 5 (Cadeira_Eames_Cadeira_Eames_137, DEC_living_book_6, DEC_living_book_4, Vase_Rounded_46, Moka_Chaleira_Moka_10)                                                                                                                                                                                                                                                                                                                                                     | 5 (Head, LeftHand, RightHand, MainRoom, SecondaryRoom)                          | 01:59        | 10704       | 53520               |
+| 005       | HamburgHaus          | Mannequin | 2 (Moka_Chaleira_Moka_10, Vase_Rounded_46)                                                                                                                                                                                                                                                                                                                                                                                                                            | 5 (Head, LeftHand, RightHand, MainRoom, SecondaryRoom)                          | 01:54        | 10269       | 51345               |
+| 006       | HamburgHaus          | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (Head, LeftHand, RightHand, MainRoom, SecondaryRoom)                          | 01:12        | 6482        | 32410               |
+| 007       | HamburgHaus          | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (Head, LeftHand, RightHand, MainRoom, SecondaryRoom)                          | 01:07        | 6059        | 30295               |
+|           |                      |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             |                     |
+| **001**   | **Viennese**         |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              | **127.521** | **679.****7****36** |
+| 000       | Viennese             | Mannequin | 3 (Fruit_Pear, Fruit_Apple, Fruit_Orange2)                                                                                                                                                                                                                                                                                                                                                                                                                            | 5 (Head, LeftHand, RightHand, TopViewCamera, CornerCamera0)                     | 04:18        | 23202       | 116.010             |
+| 001       | Viennese             | Mannequin | 7 (Fruit_Pear, Fruit_Apple, Fruit_Orange2, Pot, Pot2,  Fruit_Apple2, Fruit_Orange)                                                                                                                                                                                                                                                                                                                                                                                    | 5 (Head, LeftHand, RightHand, TopViewCamera, CornerCamera0)                     | 07:09        | 38627       | 193.135             |
+| 002       | Viennese             | Mannequin | 8 (Moka_Coffe, Pot, Fruit_Pear, Fruit_Apple, Fruit_Orange2, Fruit_Apple2, Fruit_Orange)                                                                                                                                                                                                                                                                                                                                                                               | 5 (Head, LeftHand, RightHand, TopViewCamera, CornerCamera0)                     | 04:29        | 23661       | 118.305             |
+| 003       | Viennese             | Mannequin | 14 (Flow_chair, Flow_chair2, chair_table_corners2, Fruit_Pear, Fruit_Apple, Fruit_Orange2, Fruit_Apple2, Fruit_Orange, Moka_Coffe, table_decoration1_, table_decoration_2, Pot, Pot2, DEC_dining_table_vase)                                                                                                                                                                                                                                                          | 6 (Head, LeftHand, RightHand, TopViewCamera, CornerCamera0, CornerCamera1)      | 07:57        | 42031       | 252.186             |
+|           |                      |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             |                     |
+| **002**   | **InteractiveHouse** |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | **20:08**    | **103.352** | **516.760**         |
+| 000       | InteractiveHouse     | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:39        | 8587        | 42935               |
+| 001       | InteractiveHouse     | Mannequin | 4 (Vase_13, Flower_Pot2, SM_MERGED_Plant_Bromelia_10, Chair_93)                                                                                                                                                                                                                                                                                                                                                                                                       | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:40        | 8510        | 42550               |
+| 002       | InteractiveHouse     | Mannequin | 7 (Vase_13, Flower_Pot2, SM_MERGED_Plant_Bromelia_10, Chair_93, Chair2, Chair3, Chair4)                                                                                                                                                                                                                                                                                                                                                                               | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 02:00        | 10800       | 54000               |
+| 003       | InteractiveHouse     | Mannequin | 6 (Vase_13, Flower_Pot2, SM_MERGED_Plant_Bromelia_10, DEC_dining_vase_332, DEC_dining_vase_320)                                                                                                                                                                                                                                                                                                                                                                       | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 02:31        | 13564       | 67820               |
+| 004       | InteractiveHouse     | Mannequin | 7 (Vase_13, DEC_dining_vase_332, DEC_dining_vase_320, DEC_living_book_6, Moka_Coffe_27, table_decoration_91, DEC_living_vase_410)                                                                                                                                                                                                                                                                                                                                     | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 02:47        | 14649       | 73245               |
+| 005       | InteractiveHouse     | Mannequin | 9 (Flower_Pot2, SM_MERGED_Plant_Bromelia_10, Vase_13, DEC_dining_vase_332, DEC_dining_vase_320, DEC_living_book_6, Moka_Coffe_27, table_decoration_91, DEC_living_vase_410)                                                                                                                                                                                                                                                                                           | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 02:56        | 14091       | 70455               |
+| 006       | InteractiveHouse     | Mannequin | 4 (Chair_93, Chair2, Chair3, Chair4)                                                                                                                                                                                                                                                                                                                                                                                                                                  | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:37        | 8727        | 43635               |
+| 007       | InteractiveHouse     | Mannequin | 3 (DEC_dining_table_vase_302, DEC_dining_table_sphere_004_302, DEC_dining_table_sphere_300)                                                                                                                                                                                                                                                                                                                                                                           | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 02:20        | 10888       | 54440               |
+| 008       | InteractiveHouse     | Mannequin | 6 (DEC_dining_table_vase_302, DEC_dining_table_sphere_004_302, DEC_dining_table_sphere_300, Vase_13, Moka_Coffe_27,table_decoration_91)                                                                                                                                                                                                                                                                                                                               | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:35        | 8485        | 42425               |
+| 009       | InteractiveHouse     | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:06        | 5051        | 25255               |
+|           |                      |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             |                     |
+| **003**   | **StudioApartment**  |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | **05:23**    | **28.768**  | **143.480**         |
+| 000       | StudioApartment      | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (FirstPerson, LeftHand, RightHand, Entrance, Bedroom)                         | 00:38        | 3366        | 16380               |
+| 001       | StudioApartment      | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 5 (FirstPerson, LeftHand, RightHand, Entrance, Bedroom)                         | 01:51        | 9793        | 48965               |
+| 002       | StudioApartment      | Mannequin | 5 (Pot_91, Fruit_Orange_130, Fruit_Apple_133, Moka_Coffee_144, SM_Kitchen_Deco_04_0)                                                                                                                                                                                                                                                                                                                                                                                  | 5 (FirstPerson, LeftHand, RightHand, Entrance, Bedroom)                         | 01:28        | 7829        | 39145               |
+| 003       | StudioApartment      | Mannequin | 5 (SM_Kitchen_Deco_05, SM_Kitchen_Deco_04, SM_Kitchen_Deco_02, SM_Kitchen_Deco_04_0, Moka_Coffee_144)                                                                                                                                                                                                                                                                                                                                                                 | 5 (FirstPerson, LeftHand, RightHand, Entrance, Bedroom)                         | 01:26        | 7798        | 38990               |
+|           |                      |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             |                     |
+| **004**   | **BerlinFlat**       |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | **16:32**    | **88.356**  | **441.780**         |
+| 000       | BerlinFlat           | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:33        | 7847        | 39235               |
+| 001       | BerlinFlat           | Mannequin | 5 (glass1, glass3, glass4, glass5, glass6)                                                                                                                                                                                                                                                                                                                                                                                                                            | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:45        | 9414        | 47070               |
+| 002       | BerlinFlat           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:53        | 9961        | 49805               |
+| 003       | BerlinFlat           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:46        | 9429        | 47145               |
+| 004       | BerlinFlat           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:42        | 9204        | 46020               |
+| 005       | BerlinFlat           | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:13        | 6531        | 32655               |
+| 006       | BerlinFlat           | Mannequin | 6 (glass1, glass2, glass3, glass4, glass5, glass6)                                                                                                                                                                                                                                                                                                                                                                                                                    | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:50        | 9852        | 49260               |
+| 007       | BerlinFlat           | Mannequin | 5 (chair5, chair6, chair7, chair8, chair9)                                                                                                                                                                                                                                                                                                                                                                                                                            | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:20        | 7170        | 35850               |
+| 008       | BerlinFlat           | Mannequin | 6 (glass1, glass2, glass3, glass4, glass5, glass6, )                                                                                                                                                                                                                                                                                                                                                                                                                  | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:48        | 9795        | 48975               |
+| 009       | BerlinFlat           | Mannequin | 9 (glass1, glass2, glass3, glass4, glass5, glass6, table_decoration_44, book1)                                                                                                                                                                                                                                                                                                                                                                                        | 5 (FirstPerson, LeftHand, RightHand, MainRoom, SecondaryRoom)                   | 01:42        | 9153        | 45765               |
+|           |                      |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             |                     |
+| **005**   | **Singapore**        |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              | **87.951**  | **439.755**         |
+| 000       | Singapore            | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (FirstPerson, LeftHand, RightHand, DiningRoom, LivingRoom)                    | 01:58        | 9923        | 49615               |
+| 001       | Singapore            | Mannequin | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                     | 5 (FirstPerson, LeftHand, RightHand, DiningRoom, LivingRoom)                    | 01:40        | 8992        | 44960               |
+| 002       | Singapore            | Mannequin | 5 (SM_Dining_Glass_01_31, SM_Dining_Glass_02_34, SM_Dining_Glass_3, SM_Dining_Glass_4, SM_Dining_Glass_8, SM_Dining_Glass_9, SM_Dining_Glass_10)                                                                                                                                                                                                                                                                                                                      | 5 (FirstPerson, LeftHand, RightHand, DiningRoom, LivingRoom)                    | 02:26        | 13119       | 65595               |
+| 003       | Singapore            | Mannequin | 5 (SM_Kitchen_Tableware_14, SM_Kitchen_Tableware_13, SM_Kitchen_Tableware_12, SM_Cactus_4, SM_Cactus_5)                                                                                                                                                                                                                                                                                                                                                               | 5 (FirstPerson, LeftHand, RightHand, DiningRoom, LivingRoom)                    | 01:34        | 7890        | 39450               |
+| 004       | Singapore            | Mannequin | 5 (SM_Dining_Glass_01_31, SM_Dining_Glass_02_34, SM_Dining_Glass_3, SM_Dining_Glass_4, SM_Dining_Glass_8, SM_Dining_Glass_9, SM_Dining_Glass_10)                                                                                                                                                                                                                                                                                                                      | 5 (FirstPerson, LeftHand, RightHand, DiningRoom, LivingRoom)                    | 02:17        | 12112       | 60560               |
+| 005       | Singapore            | Mannequin | 6 (SM_Dinning_Chair_9, SM_Dinning_Chair_7, SM_Dinning_Chair_6, SM_Dinning_Chair_3, SM_Dinning_Chair_2, SM_Dinning_Chair_01_8)                                                                                                                                                                                                                                                                                                                                         | 5 (FirstPerson, LeftHand, RightHand, DiningRoom, LivingRoom)                    | 02:32        | 13601       | 68005               |
+| 006       | Singapore            | Mannequin | 4 (SM_Dinning_Chair_3, SM_MBook_8, SM_Dinning_Glass_02_34, SM_Kitchen_Tableware_13)                                                                                                                                                                                                                                                                                                                                                                                   | 5 (FirstPerson, LeftHand, RightHand, DiningRoom, LivingRoom)                    | 01:41        | 9147        | 45735               |
+| 007       | Singapore            | Mannequin | 17 (SM_Dinning_Chair_9,  SM_Dinning_Chair_3, SM_Dinning_Chair_2, SM_Dinning_Chair_01_8,<br>SM_MBook_8, SM_Kitchen_Tableware_14, SM_Kitchen_Tableware_13, SM_Kitchen_Tableware_12,<br>SM_Kitchen_D7,<br>SM_Kitchen_D5_90,<br>SM_Cactus_5,<br>SM_Cactus_4,<br>SM_Dinning_Glass_01_31,<br>SM_Dinning_Glass_02_34,<br>SM_Dinning_Glass_3,<br>SM_Dinning_Glass_4,<br>SM_Dinning_Glass_8)                                                                                   | 5 (FirstPerson, LeftHand, RightHand, DiningRoom, LivingRoom)                    | 02:27        | 13167       | 65835               |
+|           |                      |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             |                     |
+| **006**   | **WarmHarbor**       |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | **17:35**    |             | **499.171** |
+| 000       | WarmHarbor           | Mannequin | Exploration secuence of the entire scene                                                                                                                                                                                                                                                                                                                                                                                                                              | 7 (FirstPerson, LeftHand, RightHand, Kitchen, Lounge, Lounge2, Lounge3)         | 03:37        | 19175       | 134225              |
+| 001       | WarmHarbor           | Mannequin | 5 (SM_SoupPot1, SM_MokaCoffe01, SM_Ginger01, SM_Wok1, SM_Decoration29)                                                                                                                                                                                                                                                                                                                                                                                                | 4 (FirstPerson, LeftHand, RightHand, Kitchen)                                   | 04:23        | 23395       | 93580               |
+| 002       | WarmHarbor           | Mannequin | 6 (SM_Wok1, SM_Melon01, SM_Decoration29, SM_SoupPot1, SM_MokaCoffe01, SM_BarChair2)                                                                                                                                                                                                                                                                                                                                                                                   | 4 (FirstPerson, LeftHand, RightHand, Kitchen)                                   | 03:16        | 17389       | 69556               |
+| 003       | WarmHarbor           | Mannequin | 6 (SM_Decoration28, SM_Decoration23, SM_Side1,  SM_Decoration26, SM_Drink5, SM_DiningChair6)                                                                                                                                                                                                                                                                                                                                                                          | 6(FirstPerson, LeftHand, RightHand, Lounge, Lounge2, Lounge3)                   | 03:37        | 19163       | 114978              |
+| 004       | WarmHarbor           | Mannequin | 7 (SM_Decoration3, SM_Decoration4, SM_Side1, SM_Decoration27, SM_Drink5, SM_Decoration23, SM_Decoration28)                                                                                                                                                                                                                                                                                                                                                            | 6(FirstPerson, LeftHand, RightHand, Lounge, Lounge2, Lounge3)                   | 02:42        | 14472       | 86832               |
+|           |                      |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             |                     |
+| **007**   | **Wooden**           |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             | **473.110**         |
+| 000       | Wooden               | Mannequin | 0 (Exploration sequence)                                                                                                                                                                                                                                                                                                                                                                                                                                              | 5 (FirstPerson, LeftHand, RightHand, SecondaryRoomCamera, SecondaryRoomCamera2) | 01:25        | 7339        | 36695               |
+| 001       | Wooden               | Mannequin | 0 (Exploration sequence)                                                                                                                                                                                                                                                                                                                                                                                                                                              | 5 (FirstPerson, LeftHand, RightHand, SecondaryRoomCamera, SecondaryRoomCamera2) | 01:16        | 6860        | 34300               |
+| 002       | Wooden               | Mannequin | 0 (Exploration sequence)                                                                                                                                                                                                                                                                                                                                                                                                                                              | 5 (FirstPerson, LeftHand, RightHand, HallCamera, DiningCamera)                  | 01:31        | 7915        | 39575               |
+| 003       | Wooden               | Mannequin | 0 (Exploration sequence)                                                                                                                                                                                                                                                                                                                                                                                                                                              | 5 (FirstPerson, LeftHand, RightHand, HallCamera, DiningCamera)                  | 01:34        | 8407        | 42035               |
+| 004       | Wooden               | Mannequin | 3 (SM_Moka_Coffe_01, SM_Dinning_Glass_207, SM_Dinning_Glass_20)                                                                                                                                                                                                                                                                                                                                                                                                       | 5 (FirstPerson, LeftHand, RightHand, HallCamera, DiningCamera)                  | 01:35        | 8452        | 42260               |
+| 005       | Wooden               | Mannequin | 5 (SM_Pepper_1, SM_KW_00, SM_KSauce_44, SM_KW_02, SM_KW_01)                                                                                                                                                                                                                                                                                                                                                                                                           | 5 (FirstPerson, LeftHand, RightHand, HallCamera, DiningCamera)                  | 01:50        | 9759        | 48795               |
+| 006       | Wooden               | Mannequin | 9 (SM_Chair_08, SM_Chair_05, SM_Chair_06, SM_Chair_07, SM_Dinning_Glass_07, SM_Dinning_Glass_11, SM_Dinning_Glass_12, SM_Dinning_Glass_04, SM_Dinning_Glass_02_138)                                                                                                                                                                                                                                                                                                   | 5 (FirstPerson, LeftHand, RightHand, HallCamera, DiningCamera)                  | 01:28        | 7858        | 39290               |
+| 007       | Wooden               | Mannequin | 18 (SM_Dinning_Glass_01_141, SM_Dinning_Glass_02_138,<br>SM_Dinning_Glass_03,<br>SM_Dinning_Glass_05,<br>SM_Dinning_Glass_06,<br>SM_Dinning_Glass_08,<br>SM_Dinning_Glass_09,<br>SM_Dinning_Glass_10,<br>SM_Dinning_Glass_174,<br>SM_Dinning_Glas_13,<br>SM_Dinning_Glass_14,<br>SM_Dinning_Glass_15,<br>SM_Dinning_Glass_16,<br>SM_Dinning_Glass_189,<br>SM_Dinning_Glass_19,<br>SM_Dinning_Glass_07, SM_Dinning_Glass_11, SM_Dinning_Glass_12, SM_Dinning_Glass_04) | 5 (FirstPerson, LeftHand, RightHand, HallCamera, DiningCamera)                  | 04:15        | 22788       | 113940              |
+| 008       | Wooden               | Mannequin | 7 (SM_Moka_Coffe_01, SM_Dinning_Glass_207,<br>SM_Dinning_Glass_20, SM_KW_00, SM_KSauce_44, SM_KW_02, SM_KW_01)                                                                                                                                                                                                                                                                                                                                                        | 5 (FirstPerson, LeftHand, RightHand, HallCamera, DiningCamera)                  | 01:55        | 9500        | 47500               |
+| 009       | Wooden               | Mannequin | 1 (SM_Deco_00)                                                                                                                                                                                                                                                                                                                                                                                                                                                        | 5 (FirstPerson, LeftHand, RightHand, CorridorCamera, DiningCamera)              | 01:05        | 5744        | 28720               |
+|           |                      |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             |                     |
+| **008**   | **ModernCozy**       |           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 |              |             | **339.097**         |
+| 000       | ModernCozy           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | 01:40        | 8866        | 44330               |
+| 001       | ModernCozy           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | 02:10        | 11617       | 58085               |
+| 002       | ModernCozy           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | 01:38        | 8791        | 43955               |
+| 003       | ModernCozy           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | 02:30        | 12729       | 63645               |
+| 004       | ModernCozy           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | 01:34        | 8306        | 41530               |
+| 005       | ModernCozy           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | 00:39        | 3567        | 14268               |
+| 006       | ModernCozy           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | 01:24        | 7582        | 22746               |
+| 007       | ModernCozy           | Mannequin |                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                 | 03:09        | 16846       | 50538               |
+
+
+### Sequences
+
+Each sequence is recorded as a TXT file that describes it and allows its offline playback to generate the aforementioned data. As a matter of fact, those TXT files are processed and converted into JSON files for improved readability and to make them easier to parse. Those sequence descriptor files contain all the information needed to generate the images and extract ground truth.
+
 ### Raw Data
 
 For each frame, we provide the following data:
 
 * 3D poses for the cameras, objects, and robot joints.
-* RGB image at 1920x1080 resolution in 24-bit PNG format.
+* RGB image at 1920x1080 resolution in 24-bit JPG(95%) format (instead of PNG for reduced size).
 * Depth map at 1920x1080 resolution in 16-bit grayscale PNG format.
 * 2D instance mask at 1920x1080 resolution in RGB 24-bit PNG format.
-
-Public download links to be released.
 
 ### Ground Truth
 
@@ -127,220 +213,59 @@ For each frame, we provide the tools to generate the following annotations:
 * 3D point cloud in PLY format with RGB color.
 * 3D instance/class mask in PLY format with RGB color.
 
-Due to the excessive size of that large-scale ground truth, we provide the needed tools and instructions so that anyone can generate the annotations they need locally using the aforementioned raw data. Nevertheless, we provide an annotated subset for visualization and demo purposes. Public download links to be released.
+Due to the excessive size of that large-scale ground truth, we provide the needed tools and instructions so that anyone can generate the annotations they need locally using the aforementioned raw data.
 
-## Tools
+## UnrealROX
 
-In this repository, we release all the tools that were used to record and generate our data and ground truth. The reason is twofold: (1) by using the tools anyone can easily reproduce our dataset and (2) anyone can modify or extend our data or generate new datasets for specific problems.
+**IMPORTANT**
 
-The codebase is divided into different parts:
-* data
-* server
-* scene parser
-* instance mapper
-* client
-* generator
-* utils
+The data for this paper was generated using a deprecated tool which extended UnrealCV to generate all the data we needed. This tool has been superseded by UnrealROX, a compatible and home-brewed C++ solution for UnrealEngine that allows efficient and flexible data recording in virtual reality and offline generation with annotations. Since this tool is better suited for our purposes (more efficient, flexible, and complete), we have removed all previous references in this repository to old RobotriX tools that we mention in the paper (although they can be obtained through commit history).
 
-### Server
+UnrealROX is described in detail at the following [arXiv](https://arxiv.org/abs/1810.06936) paper and it is released at the following [GitHub/3dperceptionlab/unrealrox](https://github.com/3dperceptionlab/unrealrox) repository.
 
-The server side contains the code to track all objects, cameras, and bones in an Unreal Engine scene and dump their identifiers, positions, rotations, and bounding boxes. This code implements an Actor in Unreal Engine tack ticks for each rendered frame and gathers all that information by iterating over cameras, actors, and bones.
-
-#### Requirements
-
-* Unreal Engine 4.18
-* Visual Studio 2017 with developer tools (for compiling the project).
-
-#### Before Executing
-
-To make the tracker work, we first need to create a new C/C++ class (Actor) in the project content browser. Make sure to name it Tracker and then open the Visual Studio project to copy the content of `./server/Tracker.h` and `./server/Tracker.cpp` into the corresponding project files.
-
-The `.cpp` can be copied directly but for the header file one must take into account that the class name depends on the project name so special attention is required to copy it. For instance, the following code fragment shows the initial part of the `Tracker.h` file for an UE4 project named HamburgHaus (notice the `class HAMBURGHAUS_API` line):
-
-```
-#include "Tracker.generated.h"
-
-UCLASS()
-class HAMBURGHAUS_API ATracker : public AActor
-{
-        GENERATED_BODY()
-```
-
-That `HAMBURGHAUS_API` prefix must be changed accordingly to the project name, e.g., for a project named InteractiveHouse it would be `INTERACTIVEHOUSE_API`.
-
-After copying the source files, we can modify two important variables in `Tracker.h`, namely `m_save_directory` and `m_file_name`. Those two will control the path to which the tracker will dump the file with the specified name respectively.
-
-Once all the changes are done, just build the scene project either using Visual Studio 2017 or Unreal Engine's button. Once the project has been successfully compiled, drag and drop the newly created actor to the scene.
-
-In addition, in order to be able to make the actor start/stop tracking (dumping the information) it is required that the `R` key is mapped to an action event `SwitchRecord` on the project input configuration.
-
-#### Execution
-
-Play the scene in Standalone mode, hit `R` to start recording and hit it again to stop dumping information or close the window.
-
-#### After Executing
-
-The tracker will generate a `.txt` file in the folder specified by the member variable `m_save_directory` in `Tracker.h`. The name of the file is specified by the corresponding variable `m_file_name`. We encourage changing those variables to a proper path and filename and then recompiling the project if the default values are not satisfactory.
-
-That text file has the following format for each frame:
-
-```
-frame_0
-timestamp frame_id
-camera_id X=x_pos Y=y_pos Z=z_pos P=pitch Y=yaw R=roll
-object_id X=x_pos Y=y_pos Z=z_pos P=pitch Y=yaw R=roll bbox_info
-bone_id X=x_pos Y=y_pos Z=z_pos P=pitch Y=yaw R=roll bbox_info
-[...]
-frame_n
-timestamp frame_id
-camera_id X=x_pos Y=y_pos Z=z_pos P=pitch Y=yaw R=roll
-object_id X=x_pos Y=y_pos Z=z_pos P=pitch Y=yaw R=roll bbox_info
-bone_id X=x_pos Y=y_pos Z=z_pos P=pitch Y=yaw R=roll bbox_info
-```
-
-### Scene Parser
-
-The scene parser is a utility to convert the raw text information dumped by the tracker on the server side into a more structured and interpretable JSON file for later reuse with other tools and data sharing. This is a strictly necessary step for using the client and the generator later.
-
-### Requirements
-
-* Python >= 2.7
-  * json
-
-#### Before Executing
-
-The scene parser is contained in `./scenetojson.py`. Before execution, two parameters of that file must be taken into account: `FILE_NAME` and `SEQUENCE_NAME`. The first one is the path to the scene text file generated by the server. The second one is the name we would like to give to that sequence. Other important parameters that might be modified are `drop_frames` (which makes our parser keep every `drop_frames` frame and discard the rest) and `skip_n_frames` (that tells the parser to skip the first `n` frames). By default we keep every frame (`drop_frames=1`) and skip the first one (`skip_n_frames=1`).
-
-#### Execution
-
-To execute the parser, just run `scenetojson.py`.
-
-#### After Executing
-
-After execution, a JSON file describing the sequence will be generated in the `./data/` folder as `./data/SEQUENCE_NAME.json`. That file can be later reused by the client and the generator to reproduce the sequence and extract useful information. That JSON file has the following format:
-
-```
-{
-  "frames": [
-    {
-      "timestamp": "319.422211", 
-      "camera": {
-        "position": {
-          "y": "0.000", 
-          "x": "165.000", 
-          "z": "124.009"
-        }, 
-        "rotation": {
-          "y": "179.999756", 
-          "p": "0.000000", 
-          "r": "0.000000"
-        }
-      }, 
-      "objects": [
-        {
-          "position": {
-            "y": "105.000", 
-            "x": "-210.000", 
-            "z": "32.000"
-          }, 
-          "rotation": {
-            "y": "-27.499922", 
-            "p": "0.000000", 
-            "r": "0.000000"
-          }, 
-          "name": "Chair"
-        }, 
-[...]
-```
-
-### Instance Mapper
-
-### Client
-
-The client side contains the code to reproduce recorded sequences and issue the needed commands using UnrealCV's client to an Unreal Engine server with UnrealCV's plugin to position the camera, the objects, and the robot on each frame and generate raw visual data: RGB, depth map, and instance segmentation mask.
-
-#### Requirements
-
-The following requirements must be met to execute the client:
-
-* Python >= 2.7
-  * json
-  * numpy
-  * matplotlib
-  * pillow
-* UnrealCV 0.3.10
-
-#### Before Executing
-
-The client takes three JSON files input for configuration: ```client/config.json```, ```client/classes.json```, and ```client/instance_class.json```. Each one of them must be carefully reviewed before executing it.
-
-The first ```config.json``` file specifies various generic configuration options regarding ```unrealengine``` (host IP and port for the Unreal Engine server), the ```scene``` (path to the sequence recording file, usually to be placed inside ```data/```), and the ```camera``` (calibration parameters ```fx```, ```cx```, ```fy```, ```cy```, ```fov```, and min/max distances in meters for depth generation ```depthmin``` and ```depthmax``` respectively). Make sure to provide the appropriate values for each one of them.
-
-The other two configuration files ```classes.json``` and ```instance_class.json``` are less likely to be modified. The first one provides information for each class of the dataset such as its ```name```, the corresponding semantic (```semantic_class```) and detection (```detection_class```) classes, and the associated ```color``` in RGB format. The second one is just a map that associates each instance name for the objects and meshes in UnrealEngine to a corresponding class. These two files can be modified for various purposes: rearranging classes, adding new ones or removing existing ones, changing their colors...
-
-#### Execution
-
-To execute the client, just execute `python client.py` inside the `client/` directory. It requires the Unreal Engine server to be up and running with the scene in ```Play``` mode (we have detected a performance increase if you do not eject from the window when playing). The client will start replaying the sequence file frame by frame and making the appropriate UnrealCV calls to generate data.
-
-#### After Executing
-
-After the client has finished, three folders (```/rgb```, ```/depth```, and ```/mask```) and three JSON files (```camera.json```, ```sequence.json```, and ```objects.json```) will be created in the ```data/sequence_name``` folder where ```sequence_name``` is the name of the sequence specified in the sequence recording JSON file that was used as input for the client.
-
-The ```/rgb``` folder contains the color maps in 24-bit RGB PNG format. The ```/depth``` directory contains the depth maps in 16-bit grayscale PNGs. The ```/mask``` one contains the instance segmentation masks in 24-bit RGB PNG format. The ```sequence.json``` file is a copy of the original sequence recording file for future reference. ```objects.json``` contains information for each object in the sequence (the given instance name by Unreal Engine ```instance_name```, the class information correlated with the ```classes.json``` and ```instance_class.json``` files, and its instance color given by UnrealCV ```instance_color``` in RGB. The ```camera.json``` contains all the camera information from the previous ```config.json```. 
-
-### Generator
-
-The generator contains the code to produce that extra annotations and data using the raw information obtained by the client and UnrealCV. The generator will take a sequence and load the RGB, depth, and instance masks for each frame to produce 2D class segmentation masks, 2D/3D bounding boxes, 3D point clouds, and 3D class and instance segmentation masks. It also needs certain sequence, camera, and object information that is passed by the respective JSON files generated by the client.
-
-#### Requirements
-
-The following requirements must be met to execute the generator:
-
-* Python >= 2.7
-  * json
-  * numpy
-  * matplotlib
-  * pillow
-  * plyfile
-
-#### Before Executing
-
-The `generator/generator.py` file contains the generator itself. Before executing it, we must specifiy the `SEQUENCE_DIR` and the `FRAME_START` inside it. The first one indicates the name of the sequence created by the client in the `data` folder so the generator will look for all the needed files in `data/SEQUENCE_DIR`. The second parameter tells the generator to skip the first `FRAME_START` frames (this is a mechanism to restart the generation process in case of failure).
-
-There are also some flags that determine which annotations will be generated: `GENERATE_2DCLASSMASK`, `GENERATE_3DINSTANCEMASK`, `GENERATE_3DCLASSMASK`, `GENERATE_2DBBOX`, `GENERATE_3DBBOX`, and `GENERATE_3DPOINTCLOUD`.
-
-#### Execution
-
-To start the generator, just execute `python generator.py` inside the `generator/` folder. The generator will start loading the frames in `data/SEQUENCE_DIR/rgb`, `data/SEQUENCE_DIR/depth`, and `data/SEQUENCE_DIR/mask` to produce the annotations starting from the `FRAME_START` frame.
-
-#### After Executing
-
-Once the generator is done, folders for the annotations (`/2dclassmask`, `/cloud`, `/2dbbox`, ...) will be created in the `data/SEQUENCE_DIR` directory with all the requested data.
-
-The `/2dclassmask` folder contains the class segmentation masks in 24-bit RGB PNG format. The `/2dbbox` and `/3dbbox` contain bounding boxes for detection in XML format. `/cloud` contains 3D point clouds with color in PLY format. `/3dclassmask` and `/3dmask` contain PLY point clouds with RGB color information representing class and instance segmentation.
-
-### Utils
-
-The `utils` folder contains a set of Python classes and methods that encapsulate functionality that is commonly reused by all the previous tools. Some of the utilities are:
-
-* `utils/camera.py` which defines a Camera class that provides functionality for holding camera information (calibration parameters, FoV, and depth range) and JSON load/store.
-* `utils/color.py` for handling RGB colors and interpreting regular expressions.
-* `utils/objectclass.py` for encapsulating information about an object class for both semantic and detection problems with their corresponding IDs, names, and colors.
-* `utils/sceneobject.py` to hold information about an object in the scene (its class, instance, and instance color assigned by UnrealCV).
-* `utils/sequence.py` for handling JSON formatted sequences.
-* `utils/ucv.py` contains functions that wrap UnrealCV commands to provide high level procedures such as object placement, camera placement, client connection...
+**IMPORTANT**
 
 ## Assets
 
-To be released...
+Assets for this project are originated from two sources: [UE4Arch](https://ue4arch.com/) and [Unreal Engine Marketplace](https://www.unrealengine.com/marketplace/store) so they can be acquired from there. At this moment, we are still in conversations with both parties to release the modified assets as we used them in our scenes.
 
 ## Troubleshooting
 
-* UnrealCV 0.3.10 segmentation issues with Unreal Engine >4.16.
+For any kind of problems, configurations, or instructions, please read carefully [UnrealROX's documentation](https://unrealrox.readthedocs.io/en/master/).
+
+We encourage any user to submit any issue related to the data itself using GitHub's built-in issue system within this repository. For any other issue related to the data generation process or tool, please submit the adequate issue to [UnrealROX's repository](https://github.com/3dperceptionlab/unrealrox). Improvements and critics are welcome at all fronts!
 
 ## License
 
-Both the data and the code for The RobotriX are released under the [MIT license](LICENSE).
+Both the data for The RobotriX and the code for UnrealROX are released under the [MIT license](LICENSE).
+
+## Citation
+
+If you use this dataset or the UnrealROX tool, please cite:
+
+- Garcia-Garcia, A., Martinez-Gonzalez, P., Oprea, S., Castro-Vargas, J. A., Orts-Escolano, S., Garcia-Rodriguez, J., & Jover-Alvarez, A. (2018, October). The RobotriX: An Extremely Photorealistic and Very-Large-Scale Indoor Dataset of Sequences with Robot Trajectories and Interactions. In 2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) (pp. 6790-6797). IEEE.
+
+```
+@inproceedings{garcia2018robotrix,
+  title={The RobotriX: An Extremely Photorealistic and Very-Large-Scale Indoor Dataset of Sequences with Robot Trajectories and Interactions},
+  author={Garcia-Garcia, Alberto and Martinez-Gonzalez, Pablo and Oprea, Sergiu and Castro-Vargas, John Alejandro and Orts-Escolano, Sergio and Garcia-Rodriguez, Jose and Jover-Alvarez, Alvaro},
+  booktitle={2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  pages={6790--6797},
+  year={2018},
+  organization={IEEE}
+}
+```
+
+- Martinez-Gonzalez, P., Oprea, S., Garcia-Garcia, A., Jover-Alvarez, A., Orts-Escolano, S., & Garcia-Rodriguez, J. (2018). UnrealROX: An eXtremely Photorealistic Virtual Reality Environment for Robotics Simulations and Synthetic Data Generation. arXiv preprint arXiv:1810.06936.
+
+```
+@article{martinez2018unrealrox,
+  title={UnrealROX: An eXtremely Photorealistic Virtual Reality Environment for Robotics Simulations and Synthetic Data Generation},
+  author={Martinez-Gonzalez, Pablo and Oprea, Sergiu and Garcia-Garcia, Alberto and Jover-Alvarez, Alvaro and Orts-Escolano, Sergio and Garcia-Rodriguez, Jose},
+  journal={arXiv preprint arXiv:1810.06936},
+  year={2018}
+}
+```
 
 ## Contact
 
