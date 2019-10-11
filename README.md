@@ -100,6 +100,15 @@ We generated a dataset of 512 sequences recorded on 16 different indoor layouts 
 
 Due to the huge size of the data (~7 TiB), we are currently distributing part of it via private links to our FTP server to avoid excessive traffic (drop a mail to [agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es) for them). However, half of the dataset is already available (and increasing every day) through [OSF](https://osf.io/b3g2y/) at https://osf.io/b3g2y/ (OSF is a free, open source web application that connects and supports the research workflow, enabling scientists to increase the efficiency and effectiveness of their research. Researchers use OSF to collaborate, document, archive, share, and register research projects, materials, and data. OSF is the flagship product of the non-profit Center for Open Science).
 
+### IMPORTANT: Instructions to unzip data from OSF
+The data uploaded to OSF was zipped in chunks. For example, suppose we are trying to unzip rgb files of a scene, so you have rgb.z01, rgb.z02, rgb.z03... and rgb.zip main file. In order to unzip the data you can do the following:
+1. Use 7-zip software which should be working and unzip rgb.zip. 
+2. Use Linux unzip, but firstly you should:
+  - Put all the parts together doing the following: `zip -F rgb.zip --out rgb_full.zip`
+  - Then you can proceed and unzip the big file rgb_full.zip doing: `unzip rgb_full.zip`
+  
+If you don't follow the instructions above you probably get bad zipfile offset errors.
+
 The following data is available at the OSF project page:
 
 | **ID**    | **Scene**            | **Robot** | **Interactable Objects**                                                                                                                                                                                                                                                                                                                                                                                                                                              | **Cameras**                                                                     | **Duration** | **Frames**  | **Total**           |
