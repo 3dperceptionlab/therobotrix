@@ -276,6 +276,14 @@ If you use this dataset or the UnrealROX tool, please cite:
 }
 ```
 
-## Contact
+## Contact / Authors
 
-Please contact Albert Garcia at [agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es) if you have any questions or requests.
+Please contact the authors if you have any questions or requests.
+
+- Alberto Garcia-Garcia [Design, Prototyping, Data Generation, Project Lead] ([agarcia@dtic.ua.es](mailto:agarcia@dtic.ua.es))
+- Pablo Martinez-Gonzalez [Design, UE4 Backend, Lead Programmer] ([pmartinez@dtic.ua.es](mailto:pmartinez@dtic.ua.es))
+- Sergiu Oprea [Grasping, Data Generation] ([soprea@dtic.ua.es](mailto:soprea@dtic.ua.es))
+- John A. Castro-Vargas [Support Programmer, Data Generation] ([jacastro@dtic.ua.es](mailto:jacastro@dtic.ua.es))
+- Alvaro Jover-Alvarez [UE4 Expert, Support Programmer] ([ajover@dtic.ua.es](mailto:ajover@dtic.ua.es))
+- Sergio Orts-Escolano [Design, Technical Advice] ([sorts@ua.es](mailto:sorts@ua.es))
+- Jose Garcia-Rodriguez [Technical Advice] ([jgarcia@dtic.ua.es](mailto:jgarcia@dtic.ua.es))
